@@ -1,5 +1,7 @@
 import './styles.css';
 
+import config from './config.js';
+
 class FactoryStandardProcedureSystem {
     constructor() {
         this.currentSession = null;
@@ -89,10 +91,10 @@ class FactoryStandardProcedureSystem {
             this.showLoading();
             
             // Load workers and components in parallel
-            const [workersResponse, componentsResponse] = await Promise.all([
-                fetch('/api/workers'),
-                fetch('/api/components')
-            ]);
+                    const [workersResponse, componentsResponse] = await Promise.all([
+            fetch(`${config.API_BASE_URL}/api/workers`),
+            fetch(`${config.API_BASE_URL}/api/components`)
+        ]);
 
             if (!workersResponse.ok || !componentsResponse.ok) {
                 throw new Error('Failed to load initial data');
@@ -143,7 +145,7 @@ class FactoryStandardProcedureSystem {
         try {
             this.showLoading();
             
-            const response = await fetch('/api/sessions', {
+            const response = await fetch(`${config.API_BASE_URL}/api/sessions`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -210,7 +212,7 @@ class FactoryStandardProcedureSystem {
         try {
             this.showLoading();
             
-            const response = await fetch(`/api/sessions/${this.currentSession.session_id}/scan`, {
+            const response = await fetch(`${config.API_BASE_URL}/api/sessions/${this.currentSession.session_id}/scan`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -545,7 +547,7 @@ class FactoryStandardProcedureSystem {
         try {
             this.showLoading();
             
-            const response = await fetch(`/api/sessions/${this.currentSession.session_id}/install`, {
+            const response = await fetch(`${config.API_BASE_URL}/api/sessions/${this.currentSession.session_id}/install`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -660,7 +662,7 @@ class FactoryStandardProcedureSystem {
         try {
             this.showLoading();
             
-            const response = await fetch(`/api/sessions/${this.currentSession.session_id}/complete`, {
+            const response = await fetch(`${config.API_BASE_URL}/api/sessions/${this.currentSession.session_id}/complete`, {
                 method: 'PUT'
             });
 
@@ -737,7 +739,7 @@ class FactoryStandardProcedureSystem {
         try {
             this.showLoading();
             
-            const response = await fetch('/api/sessions');
+            const response = await fetch(`${config.API_BASE_URL}/api/sessions`);
             if (!response.ok) {
                 throw new Error('Failed to load sessions');
             }
@@ -817,7 +819,7 @@ class FactoryStandardProcedureSystem {
         try {
             this.showLoading();
             
-            const response = await fetch('/api/sessions');
+            const response = await fetch(`${config.API_BASE_URL}/api/sessions`);
             if (!response.ok) {
                 throw new Error('Failed to load sessions');
             }
@@ -843,7 +845,7 @@ class FactoryStandardProcedureSystem {
         try {
             this.showLoading();
             
-            const response = await fetch('/api/reset-db', {
+            const response = await fetch(`${config.API_BASE_URL}/api/reset-db`, {
                 method: 'POST'
             });
             
