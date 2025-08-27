@@ -9,25 +9,34 @@
     "build": "webpack --mode production",
     "dev-build": "webpack --mode development --watch",
     "vercel-build": "webpack --mode production",
-    "render-build": "npm install"
+    "render-build": "npm install",
+    "postbuild": "echo 'Build completed successfully'",
+    "build:dev": "webpack --mode development",
+    "build:prod": "webpack --mode production"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "cors": "^2.8.5",
     "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "moment": "^2.29.4",
     "sqlite3": "^5.1.6",
-    "uuid": "^9.0.1",
-    "moment": "^2.29.4"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1",
-    "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4",
     "css-loader": "^6.8.1",
+    "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.9.4",
+    "nodemon": "^3.0.1",
     "style-loader": "^3.3.3",
-    "html-webpack-plugin": "^5.5.3"
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
   },
-  "keywords": ["factory", "procedure", "quality-control", "manufacturing"],
+  "keywords": [
+    "factory",
+    "procedure",
+    "quality-control",
+    "manufacturing"
+  ],
   "author": "Your Name",
   "license": "MIT"
 }

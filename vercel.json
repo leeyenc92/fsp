@@ -8,6 +8,14 @@
   ],
   "routes": [
     {
+      "src": "/styles.css",
+      "dest": "/public/styles.css"
+    },
+    {
+      "src": "/bundle.js",
+      "dest": "/public/bundle.js"
+    },
+    {
       "src": "/(.*)",
       "dest": "/public/index.html"
     }
