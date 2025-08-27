@@ -1,0 +1,7 @@
+node_modules
+server.js
+fsps.db
+*.log
+.env
+.env.local
+.env.production

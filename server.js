@@ -14,8 +14,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-// Database setup
-const db = new sqlite3.Database('./fsps.db');
+// Database setup - use in-memory database for Render (ephemeral storage)
+const dbPath = process.env.NODE_ENV === 'production' ? ':memory:' : './fsps.db';
+const db = new sqlite3.Database(dbPath);
 
 // Initialize database tables
 db.serialize(() => {
@@ -128,6 +129,11 @@ db.serialize(() => {
       stmt.finalize();
     }
   });
+});
+
+// Health check endpoint for Render
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
 // API Routes

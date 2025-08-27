@@ -1,0 +1,9 @@
+node_modules
+public
+src
+webpack.config.js
+.git
+.gitignore
+README.md
+vercel.json
+.vercelignore
