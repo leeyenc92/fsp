@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Prosedur Piawai Kilang</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-industry"></i>
+                                         <h1>Sistem Prosedur Piawai Kilang</h1>
+                </div>
+                <div class="header-actions">
+                                         <button id="viewStatsBtn" class="btn btn-secondary">
+                         <i class="fas fa-chart-bar"></i> Lihat Statistik
+                     </button>
+                     <button id="viewSessionsBtn" class="btn btn-secondary">
+                         <i class="fas fa-list"></i> Semua Sesi
+                     </button>
+                     <button id="resetDbBtn" class="btn btn-warning">
+                         <i class="fas fa-database"></i> Reset Database
+                     </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Worker Selection -->
+            <section id="workerSelection" class="section">
+                                 <div class="section-header">
+                     <h2><i class="fas fa-user"></i> Pilih Pekerja</h2>
+                     <p>Pilih ID pekerja anda untuk memulakan sesi pemasangan</p>
+                 </div>
+                <div class="worker-selection">
+                    <select id="workerSelect" class="select-input">
+                        <option value="">Pilih pekerja...</option>
+                    </select>
+                    <button id="startSessionBtn" class="btn btn-primary" disabled>
+                                                 <i class="fas fa-play"></i> Mulakan Sesi Pemasangan
+                    </button>
+                </div>
+            </section>
+
+            <!-- Installation Session -->
+            <section id="installationSession" class="section hidden">
+                                                  <div class="section-header">
+                     <h2><i class="fas fa-tools"></i> Sesi Pemasangan</h2>
+                     <div class="session-info">
+                         <span id="sessionWorker"></span>
+                         <span id="sessionTime"></span>
+                         <span id="sessionStatus"></span>
+                     </div>
+                 </div>
+                 
+                 <!-- Demo Components Hint -->
+                 <div class="demo-hint">
+                     <h4><i class="fas fa-lightbulb"></i> Petunjuk Komponen Demo untuk Ujian</h4>
+                     <div class="demo-components">
+                         <div class="demo-component">
+                             <strong>PA-001</strong> - Papan Asas (Urutan 1)
+                         </div>
+                         <div class="demo-component">
+                             <strong>PM-002</strong> - Pemegang Motor (Urutan 2)
+                         </div>
+                         <div class="demo-component">
+                             <strong>TP-003</strong> - Tali Pemacu (Urutan 3)
+                         </div>
+                         <div class="demo-component">
+                             <strong>PK-004</strong> - Panel Kawalan (Urutan 4)
+                         </div>
+                         <div class="demo-component">
+                             <strong>PK-005</strong> - Pelindung Keselamatan (Urutan 5)
+                         </div>
+                     </div>
+                     <p class="demo-note">
+                         <i class="fas fa-info-circle"></i> 
+                         <strong>Nota Ujian:</strong> Imbas komponen mengikut urutan yang betul. 
+                         Setiap komponen mesti ditandakan "Pemasangan Selesai" sebelum mengimbas yang seterusnya.
+                     </p>
+                 </div>
+
+                <!-- Component Scanner -->
+                <div class="scanner-section">
+                    <div class="scanner-input">
+                        <label for="componentScanner">Imbas Nombor Bahagian Komponen:</label>
+                        <div class="scanner-group">
+                                                         <input type="text" id="componentScanner" class="input-field" placeholder="Masukkan atau imbas nombor bahagian...">
+                            <button id="scanBtn" class="btn btn-primary">
+                                                                 <i class="fas fa-barcode"></i> Imbas
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Current Component Display -->
+                <div id="currentComponent" class="component-display hidden">
+                    <div class="component-header">
+                        <h3 id="componentName"></h3>
+                        <span id="componentPartNumber" class="part-number"></span>
+                    </div>
+                    <div class="component-details">
+                        <p id="componentDescription"></p>
+                        <div class="sequence-info">
+                            <span class="sequence-badge">Urutan: <span id="sequenceOrder"></span></span>
+                        </div>
+                    </div>
+                                         <div class="installation-guide">
+                         <h4><i class="fas fa-list-ol"></i> Panduan Pemasangan</h4>
+                         <div id="guideSteps" class="guide-steps"></div>
+                         <div class="install-actions">
+                             <button id="installCompleteBtn" class="btn btn-success">
+                                 <i class="fas fa-check-circle"></i> Tandakan Pemasangan Selesai
+                             </button>
+                         </div>
+                     </div>
+                 </div>
+
+                <!-- Error Display -->
+                <div id="errorDisplay" class="error-display hidden">
+                    <div class="error-content">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Ralat Pemasangan</h3>
+                        <p id="errorMessage"></p>
+                        <div class="error-actions">
+                            <button id="acknowledgeErrorBtn" class="btn btn-danger">
+                                                                 <i class="fas fa-check"></i> Akui Ralat
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Session Progress -->
+                <div class="session-progress">
+                                         <h4><i class="fas fa-tasks"></i> Kemajuan Sesi</h4>
+                    <div id="progressBar" class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                    <div class="progress-stats">
+                                                 <span>Komponen: <span id="componentsCount">0</span>
+                         <span>Imbasan Salah: <span id="errorsCount">0/3</span></span>
+                    </div>
+                </div>
+
+                <!-- Session Actions -->
+                <div class="session-actions">
+                    <button id="completeSessionBtn" class="btn btn-success">
+                                                 <i class="fas fa-check-circle"></i> Selesai Sesi
+                    </button>
+                    <button id="resetSessionBtn" class="btn btn-warning">
+                                                 <i class="fas fa-redo"></i> Set Semula Sesi
+                    </button>
+                </div>
+            </section>
+
+            <!-- Statistics Modal -->
+            <div id="statsModal" class="modal hidden">
+                <div class="modal-content">
+                    <div class="modal-header">
+                                                 <h2><i class="fas fa-chart-bar"></i> Statistik Pemasangan</h2>
+                        <button class="modal-close">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="statsContent"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sessions Modal -->
+            <div id="sessionsModal" class="modal hidden">
+                <div class="modal-content">
+                    <div class="modal-header">
+                                                 <h2><i class="fas fa-list"></i> Semua Sesi Pemasangan</h2>
+                        <button class="modal-close">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="sessionsContent"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Processing...</p>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+</body>
+</html>

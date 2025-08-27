@@ -1,0 +1,31 @@
+{
+  "name": "factory-standard-procedure-system",
+  "version": "1.0.0",
+  "description": "A system to prevent worker mistakes through component scanning and guided installation",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "webpack --mode production",
+    "dev-build": "webpack --mode development --watch"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "body-parser": "^1.20.2",
+    "sqlite3": "^5.1.6",
+    "uuid": "^9.0.1",
+    "moment": "^2.29.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "css-loader": "^6.8.1",
+    "style-loader": "^3.3.3",
+    "html-webpack-plugin": "^5.5.3"
+  },
+  "keywords": ["factory", "procedure", "quality-control", "manufacturing"],
+  "author": "Your Name",
+  "license": "MIT"
+}
